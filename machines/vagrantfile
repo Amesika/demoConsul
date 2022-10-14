@@ -1,0 +1,32 @@
+BOX_IMAGE = "bento/ubuntu-16.04"
+NODE_COUNT = 2
+BRIDGE = "Realtek RTL8822BE 802.11ac PCIe Adapter"
+
+Vagrant.configure("2") do |config|
+  config.vm.define "consulMaster" do |subconfig|
+    subconfig.vm.box = BOX_IMAGE
+    subconfig.vm.hostname = "consulMaster"
+    subconfig.vm.provider "virtualbox" do |vb|
+        vb.memory = 1024
+        vb.cpus = 1
+        vb.name = "consulMaster"
+    end
+    subconfig.vm.network "public_network",bridge: BRIDGE, ip: "192.168.0.20"
+    subconfig.vm.synced_folder "scripts/", "/scripts/"
+  end
+  
+  (1..NODE_COUNT).each do |i|
+    config.vm.define "consulNode-#{i}" do |subconfig|
+        subconfig.vm.box = BOX_IMAGE
+        subconfig.vm.hostname = "consulNode-#{i}"
+        subconfig.vm.provider "virtualbox" do |vb|
+                vb.memory = 1024
+                vb.cpus = 1
+                vb.name = "consulNode-#{i}"
+                
+        end
+        subconfig.vm.network "public_network",bridge: BRIDGE, ip: "192.168.0.2#{i}"
+        subconfig.vm.synced_folder "scripts/", "/scripts/"
+    end
+  end
+end

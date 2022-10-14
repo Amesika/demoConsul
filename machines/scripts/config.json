@@ -1,0 +1,27 @@
+{
+    "advertise_addr": "192.168.0.20",
+    "bind_addr": "192.168.0.20",
+    "bootstrap_expect": 2,
+    "client_addr": "0.0.0.0",
+    "datacenter":"FevillDc",
+    "data_dir":"/var/lib/consul",
+    "domain": "consul",
+    "enable_script_checks": true,
+    "dns_config": {
+        "enable_truncate": true,
+        "only_passing": true
+    },
+    "enable_syslog": true,
+    "encrypt": "VoX1H6Fg3dYBzbd1G8cLGzSiEJk6wC7YAjmYXk+5axA=",
+    "leave_on_terminate": true,
+    "log_level": "INFO",
+    "rejoin_after_leave": true,
+    "retry_join":[
+        "192.168.0.20"
+    ],
+    "server": true,
+    "start_join": [
+        "192.168.0.20"
+    ],
+    "ui": true
+}
